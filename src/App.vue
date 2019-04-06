@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <Main msg="Example usage of data table component"/>
-    <DataTable 
+    <v-main msg="Example usage of data table component"/>
+    <v-datatable 
       :columns="['name', 'ID', 'date', 'description', 'amount']"
       title="Data Table Component"
     />
@@ -10,16 +10,16 @@
 </template>
 
 <script>
-import Main from './components/Main.vue';
-import DataTable from './components/DataTable.vue';
+  import Main from './components/Main.vue';
+  import DataTable from './components/DataTable';
 
-export default {
-  name: 'app',
-  components: {
-    Main,
-    DataTable
+  export default {
+    name: 'app',
+    components: {
+      'v-main': Main,
+      'v-datatable': DataTable
+    }
   }
-}
 </script>
 
 <style>

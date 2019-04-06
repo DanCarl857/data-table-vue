@@ -3,58 +3,56 @@
         <div class="dc-table">
             <h3 class="title">{{ title }}</h3>
             <div class="row">
-                <div class="col col-md-6" style="float: left;">
-                    <div class="row" style="vertical-align: middle">
+                <div class="col col-md-6 left">
+                    <div class="row">
                         <div class="col col-md-1 col-xs-12">Show</div>
-                        <div class="col col-md-5 col-xs-12" style="margin-top: -6px;">
+                        <div class="col col-md-5 col-xs-12 marginTop6">
                             <input v-model="size" type="number" class="form-control" placeholder="# of entries">
                         </div>  
-                        <div class="col col-md-1 col-xs-12" style="margin-left: -25px;">
+                        <div class="col col-md-1 col-xs-12 margin25">
                             entries
                         </div>
                     </div>
                 </div>
-                <div class="col col-md-6" style="margin-top: -6px;">
+                <div class="col col-md-6 marginTop6">
                     <input v-model="search" class="form-control" placeholder="Filter users by name">
                 </div>
             </div>
             <br />
-            <table class="table table-striped table-responsive">
-                <thead>
-                    <tr>
-                        <th class="table-head">#</th>
-                        <th v-for="column in columns" :key="column" class="table-head" @click="sortBy(column)">
-                            {{ column | columnHead }}
-                            <!-- <span v-if="column === sortedColumn">
-                                <img src="./../assets/img/up_arrow.png" alt="Up arrow" v-if="order === 'asc'" />
-                                <img src="./../assets/img/down_arrow.png" alt="Down arrow" v-else class="fas fa-arrow-down" />
-                            </span> -->
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="" v-if="allEntries && allEntries.length <= 0">
-                        <td class="lead text-center alert alert-warning" :colspan="columns.length + 1">
-                            No data found.
-                        </td>
-                    </tr>
-                    <tr v-for="(data, key1) in paginatedData" :key="data.id" class="m-datatable__row" v_else>
-                        <td>{{ tableNumber(key1) }}</td>
-                        <td class="name">{{ data.Name }}</td>
-                        <td>{{ data.ID | reduceString }}</td>
-                        <td style="font-style: italic; font-weight: 700;">{{ data.Date | formatDate }}</td>
-                        <td data-toggle="modal" data-target="#myModal">
-                            <span class="circle">
-                                <img @click="showModal(data)" src="./../assets/img/edit.png" alt="Edit" />
-                            </span>&nbsp;
-                            {{ data.Description }} 
-                        </td>
-                        <td>
-                            <span :class="[ data.Amount > 0 ? 'amount positive' : 'amount negative' ]">{{ data.Amount }}</span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table> 
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="table-head">#</th>
+                            <th v-for="column in columns" :key="column" class="table-head" @click="sortBy(column)">
+                                {{ column | columnHead }}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="" v-if="allEntries && allEntries.length <= 0">
+                            <td class="lead text-center alert alert-warning" :colspan="columns.length + 1">
+                                No data found.
+                            </td>
+                        </tr>
+                        <tr v-for="(data, key1) in paginatedData" :key="data.id" class="m-datatable__row" v_else>
+                            <td>{{ tableNumber(key1) }}</td>
+                            <td class="name">{{ data.Name }}</td>
+                            <td>{{ data.ID | reduceString }}</td>
+                            <td class="date">{{ data.Date | formatDate }}</td>
+                            <td data-toggle="modal" data-target="#myModal">
+                                <span class="circle">
+                                    <img @click="showModal(data)" src="./../../assets/img/edit.png" alt="Edit" />
+                                </span>&nbsp;
+                                {{ data.Description }} 
+                            </td>
+                            <td>
+                                <span :class="[ data.Amount > 0 ? 'amount positive' : 'amount negative' ]">{{ data.Amount }}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> 
 
             <!-- Modal content-->
             <div class="modal fade" id="myModal" role="dialog">
@@ -139,7 +137,7 @@
                 const start = this.pageNumber * this.size, end = start + this.size;
                 let pData = this.allEntries.slice(start, end);
 
-                // initially always sort by date
+                // initially always sort by date so recent transactions are shown first
                 pData.sort((a, b) => {
                     let date1 = new Date(a.Date);
                     let date2 = new Date(b.Date);
@@ -232,6 +230,11 @@
         margin-bottom: 40px;
     }
 
+    .date {
+        font-style: italic;
+        font-weight: 700;
+    }
+
     .circle {
         cursor: pointer;
         border: 1px solid #fff;
@@ -279,5 +282,17 @@
 
     .negative {
         background-color: #ec8787;
+    }
+
+    .margin25 {
+        margin-left: -25px;
+    }
+
+    .marginTop6 {
+        margin-top: -6px;
+    }
+
+    .left {
+        float: left;
     }
 </style>
