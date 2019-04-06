@@ -81,8 +81,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-default btn-success" @click="editDescription"> Update</button>
-                            <button type="submit" class="btn btn-default btn-danger pull-left" data-dismiss="modal"> 
-                                Cancel
+                            <button type="submit" class="btn btn-default btn-warning pull-left" data-dismiss="modal"> 
+                                Close
                             </button>
                         </div>
                     </div>
@@ -163,24 +163,18 @@
                 return key + 1;
             },
             sortBy(columnHeader) {
-                console.log(this.paginatedData);
                 console.log(columnHeader);
             },
             showModal(data) {
                 this.modalData = Object.assign({}, data);
             },
             editDescription() {
-                console.log(this.description);
-                const payload = {
-                    name: 'Shit',
-                    age: 54,
-                    status: 'test'
-                }
-                console.log(payload);
+                this.modalData.Description = this.description;
                 this.updateEntry({
                     key: this.modalData.ID,
-                    value: payload
+                    value: Object.assign({}, this.modalData)
                 });
+                this.description = '';
             },
             nextPage() {
                 this.pageNumber++;

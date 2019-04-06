@@ -19,6 +19,10 @@ export const store = new Vuex.Store({
     actions: {
         setEntries: context => {
             context.commit('setEntries');
+        },
+
+        editEntry: context => {
+            context.dispatch('editEntry');
         }
     },
     mutations: {
@@ -28,11 +32,23 @@ export const store = new Vuex.Store({
             });
         },
 
+        // TODO: Refactor this to make it more efficient
         editEntry: (state, payload) => {
-            console.log(payload);
-            // console.log(index);
-            // console.log(firebase.database.ref(`entries/${index}`));
-            console.log(firebase.database().ref.child('entries'));
+            let index = state.entries.findIndex((entry) => {
+                return entry.ID == payload.value.ID && entry.Name == payload.value.Name
+            });
+
+            if (index >= 0) {
+                let data = Object.assign([], state.entries);
+                data[index] = payload.value;
+                firebase.database().ref('entries').set(data, (error) => {
+                    if (error) {
+                        console.log('[ERROR]: ' + error);
+                    } else {
+                        Vue.set(state, 'entries', data);
+                    }
+                })
+            }
         }
     }
 })
