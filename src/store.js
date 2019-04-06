@@ -43,6 +43,7 @@ export const store = new Vuex.Store({
                 data[index] = payload.value;
                 firebase.database().ref('entries').set(data, (error) => {
                     if (error) {
+                        // TODO: Better error handling
                         console.log('[ERROR]: ' + error);
                     } else {
                         Vue.set(state, 'entries', data);

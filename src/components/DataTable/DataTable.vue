@@ -101,7 +101,7 @@
 
 
 <script>
-    import { mapGetters, mapMutations } from 'vuex';
+    import { mapMutations } from 'vuex';
     import moment from 'moment';
 
     export default {
