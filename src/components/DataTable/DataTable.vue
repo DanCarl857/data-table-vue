@@ -30,7 +30,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="" v-if="allEntries && allEntries.length <= 0">
+                        <tr class="" v-if="dtData && count <= 0">
                             <td class="lead text-center alert alert-warning" :colspan="columns.length + 1">
                                 No data found.
                             </td>
@@ -112,6 +112,8 @@
         props: {
             columns: { type: Array, required: true },
             title: { type: String, required: false, default: "Data Table Component" },
+            dtData: { type: Array, required: true },
+            count: { type: Number, required: true, default: 100 }
         },
         data() {
             return {
@@ -125,17 +127,13 @@
             }
         },
         computed: {
-            ...mapGetters({
-                allEntries: 'getEntries',
-                entriesCount: 'getEntriesCount'
-            }),
             pageCount() {
-                let l = this.entriesCount, s = this.size;
+                let l = this.count, s = this.size;
                 return Math.ceil(l/s);
             },
             paginatedData() {
                 const start = this.pageNumber * this.size, end = start + this.size;
-                let pData = this.allEntries.slice(start, end);
+                let pData = this.dtData.slice(start, end);
 
                 // initially always sort by date so recent transactions are shown first
                 pData.sort((a, b) => {

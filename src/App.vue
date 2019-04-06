@@ -5,6 +5,8 @@
     <v-datatable 
       :columns="['name', 'ID', 'date', 'description', 'amount']"
       title="Data Table Component"
+      :dtData="allEntries"
+      :count="entriesCount"
     />
   </div>
 </template>
@@ -13,11 +15,28 @@
   import Main from './components/Main.vue';
   import DataTable from './components/DataTable';
 
+  import { mapGetters, mapMutations } from 'vuex';
+  import moment from 'moment';
+
   export default {
     name: 'app',
     components: {
       'v-main': Main,
       'v-datatable': DataTable
+    },
+    beforeCreate() {
+      this.$store.dispatch('setEntries');
+    },
+    computed: {
+      ...mapGetters({
+        allEntries: 'getEntries',
+        entriesCount: 'getEntriesCount'
+      })
+    },
+    methods: {
+      ...mapMutations({
+        updateEntry: 'editEntry'
+      })
     }
   }
 </script>
