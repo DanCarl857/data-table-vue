@@ -3,8 +3,7 @@
     <img alt="Vue logo" src="./assets/logo.png">
     <Main msg="Example usage of data table component"/>
     <DataTable 
-      :columns="['name', 'amount', 'date', 'description']"
-      fetchUrl="https://github.com/DanCarl857"
+      :columns="['name', 'ID', 'date', 'description', 'amount']"
       title="Data Table Component"
     />
   </div>
