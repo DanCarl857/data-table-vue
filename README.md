@@ -64,7 +64,7 @@ In what ways would you adapt this component so that it could be used in many dif
 ```
 What CSS property did you recently learn about that helped you on a project
 ```
-* In general I learned about the [BEM](https://en.bem.info/methodology/) which helped me better structure my CSS when I wasn't using Sass
+* In general I learned about the [BEM](https://en.bem.info/methodology/) which helped me better structure my CSS
 
 ```
 What is your favorite modern Javascript feature? Why?

@@ -1,20 +1,20 @@
 <template>
     <div class="container box data-table">
-        <div class="dc-table">
-            <h3 class="title">{{ title }}</h3>
+        <div class="data-table__content">
+            <h3 class="data-table__title">{{ title }}</h3>
             <div class="row">
-                <div class="col col-md-6 left">
+                <div class="col col-md-6 data-table--left">
                     <div class="row">
                         <div class="col col-md-1 col-xs-12">Show</div>
-                        <div class="col col-md-5 col-xs-12 marginTop6">
+                        <div class="col col-md-5 col-xs-12 data-table--marginTop6">
                             <input v-model="size" type="number" class="form-control" placeholder="# of entries">
                         </div>  
-                        <div class="col col-md-1 col-xs-12 margin25">
+                        <div class="col col-md-1 col-xs-12 data-table--margin25">
                             entries
                         </div>
                     </div>
                 </div>
-                <div class="col col-md-6 marginTop6">
+                <div class="col col-md-6 data-table--marginTop6">
                     <input v-model="search" class="form-control" placeholder="Filter users by name">
                 </div>
             </div>
@@ -37,17 +37,17 @@
                         </tr>
                         <tr v-for="(data, key1) in paginatedData" :key="data.id" class="m-datatable__row" v_else>
                             <td>{{ tableNumber(key1) }}</td>
-                            <td class="name">{{ data.Name }}</td>
+                            <td class="data-table__name">{{ data.Name }}</td>
                             <td>{{ data.ID | reduceString }}</td>
-                            <td class="date">{{ data.Date | formatDate }}</td>
+                            <td class="data-table__date">{{ data.Date | formatDate }}</td>
                             <td data-toggle="modal" data-target="#myModal">
-                                <span class="circle">
+                                <span class="data-table__circle">
                                     <img @click="showModal(data)" src="./../../assets/img/edit.png" alt="Edit" />
                                 </span>&nbsp;
                                 {{ data.Description }} 
                             </td>
-                            <td>
-                                <span :class="[ data.Amount > 0 ? 'amount positive' : 'amount negative' ]">{{ data.Amount }}</span>
+                            <td class="data_table__amount">
+                                <span :class="[ data.Amount > 0 ? 'amount--positive' : 'amount--negative' ]">{{ data.Amount }}</span>
                             </td>
                         </tr>
                     </tbody>
@@ -228,12 +228,12 @@
         margin-bottom: 40px;
     }
 
-    .date {
+    .data-table__date {
         font-style: italic;
         font-weight: 700;
     }
 
-    .circle {
+    .data-table__circle {
         cursor: pointer;
         border: 1px solid #fff;
         padding: 3px 5px;
@@ -242,16 +242,16 @@
         box-shadow: 2px 2px 1px #d4d4d4
     }
 
-    .circle img {
+    .data-table__circle img {
         width: 14px;
         height: 14px;
     }
 
-    .dc-table {
+    .data-table__content {
         text-align: left;
     }
 
-    .name {
+    .data-table__name {
         font-weight: 800;
     }
 
@@ -263,7 +263,7 @@
         margin-left: 15px;
     }
 
-    .amount {
+    .data-table__amount {
         color: #fff;
         font-weight: 700;
         padding: 4px 10px;
@@ -273,24 +273,24 @@
         box-shadow: 4px 4px 2px #d4d4d4
     }
 
-    .positive {
+    .data-table__amount--positive {
         color: #3a3a3a;
         
     }
 
-    .negative {
+    .data-table__amount--negative {
         background-color: #ec8787;
     }
 
-    .margin25 {
+    .data-table--margin25 {
         margin-left: -25px;
     }
 
-    .marginTop6 {
+    .data-table--marginTop6 {
         margin-top: -6px;
     }
 
-    .left {
+    .data-table--left {
         float: left;
     }
 </style>

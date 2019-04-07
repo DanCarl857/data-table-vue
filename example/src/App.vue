@@ -16,7 +16,6 @@
   import DataTable from './components/DataTable';
 
   import { mapGetters, mapMutations } from 'vuex';
-  import moment from 'moment';
 
   export default {
     name: 'app',
